@@ -21,6 +21,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:onClick="plus"
+
         android:id="@+id/plus"
         android:layout_width="88dp"
         android:layout_height="79dp"
@@ -30,6 +32,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:onClick="minus"
+
         android:id="@+id/minus"
         android:layout_width="88dp"
         android:layout_height="79dp"
@@ -44,10 +48,13 @@
         android:layout_height="79dp"
         android:layout_marginStart="220dp"
         android:text="*"
+        android:onClick="multiply"
         app:layout_constraintStart_toStartOf="@+id/plus"
         app:layout_constraintTop_toBottomOf="@+id/Display" />
 
     <Button
+        android:onClick="divide"
+
         android:id="@+id/div"
         android:layout_width="88dp"
         android:layout_height="79dp"
@@ -68,6 +75,7 @@
         app:layout_constraintTop_toBottomOf="@+id/plus" />
 
     <Button
+        android:onClick="equal"
         android:id="@+id/equal"
         android:layout_width="132dp"
         android:layout_height="64dp"
@@ -82,6 +90,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
+        android:onClick="credits"
         android:id="@+id/credits"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
