@@ -66,6 +66,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:onClick="ac"
         android:id="@+id/ac"
         android:layout_width="132dp"
         android:layout_height="64dp"

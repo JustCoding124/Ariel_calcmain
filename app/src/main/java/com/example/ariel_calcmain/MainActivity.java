@@ -1,6 +1,9 @@
 package com.example.ariel_calcmain;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -11,11 +14,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-    private double last;
+    public double last=0;
     private String text;
     private String sign ="";
     private double first=0;
-    private double secound=0;
     private EditText display;
     private Button plus;
     private Button minus;
@@ -43,134 +45,139 @@ public class MainActivity extends AppCompatActivity {
         equal =  (Button) findViewById(R.id.equal);
         credits =  (Button) findViewById(R.id.credits);
     }
-    public int plus(){
+    public void plus(View view){
         text = display.getText().toString();
         if (!sign.isEmpty()){
-            text = text.substring(1);
-            for (int i =0; i<text.length();i++){
-                if (Integer.valueOf(text.charAt(i))<49 || Integer.valueOf(text.charAt(i))>57 ){
+            display.setText("ERROR");
+        }
+        else {
+            for (int i = 0; i < text.length(); i++) {
+                if ((int)(text.charAt(i)) < 49 || (int)(text.charAt(i)) > 57) {
                     display.setText("ERROR");
-                    return -1;
+                    break;
                 }
             }
-            secound = Integer.valueOf(text);
-            first +=secound;
+        }
+        text = display.getText().toString();
+        if (!text.equals("ERROR")){
+            first = Integer.valueOf(text);
+            sign = "+";
+            display.setHint("+");
+            display.setText("");        }
+    }
+    public void minus(View view){
+        text = display.getText().toString();
+        if (!sign.isEmpty()){
+            display.setText("ERROR");
         }
         else {
             for (int i = 0; i < text.length(); i++) {
                 if (Integer.valueOf(text.charAt(i)) < 49 || Integer.valueOf(text.charAt(i)) > 57) {
                     display.setText("ERROR");
-                    return -1;
+                    break;
                 }
             }
-            first = Integer.valueOf(text);
         }
-        sign = "+";
-        display.setText("+");
-        return 0;
-
+        text = display.getText().toString();
+        if (!text.equals("ERROR")){
+            first = Integer.valueOf(text);
+            sign = "-";
+            display.setHint("-");
+            display.setText("");
+        }
     }
-    public int minus(){
+    public void multiply(View view){
         text = display.getText().toString();
         if (!sign.isEmpty()){
-            text = text.substring(1);
-            for (int i =0; i<text.length();i++){
-                if (Integer.valueOf(text.charAt(i))<49 || Integer.valueOf(text.charAt(i))>57 ){
-                    display.setText("ERROR");
-                    return -1;
-                }
-            }
-            secound = Integer.valueOf(text);
-            first -=secound;
+            display.setText("ERROR");
         }
         else {
             for (int i = 0; i < text.length(); i++) {
                 if (Integer.valueOf(text.charAt(i)) < 49 || Integer.valueOf(text.charAt(i)) > 57) {
                     display.setText("ERROR");
-                    return -1;
+                    break;
                 }
             }
-            first = Integer.valueOf(text);
         }
-        sign = "-";
-        display.setText("-");
-        return 0;
+        text = display.getText().toString();
+        if (!text.equals("ERROR")){
+            first = Integer.valueOf(text);
+            sign = "*";
+            display.setHint("*");
+            display.setText("");
+        }
     }
-    public int multiply(){
+    public void divide(View view){
         text = display.getText().toString();
         if (!sign.isEmpty()){
-            text = text.substring(1);
-            for (int i =0; i<text.length();i++){
-                if (Integer.valueOf(text.charAt(i))<49 || Integer.valueOf(text.charAt(i))>57 ){
-                    display.setText("ERROR");
-                    return -1;
-                }
-            }
-            secound = Integer.valueOf(text);
-            first *=secound;
+            display.setText("ERROR");
         }
         else {
             for (int i = 0; i < text.length(); i++) {
                 if (Integer.valueOf(text.charAt(i)) < 49 || Integer.valueOf(text.charAt(i)) > 57) {
                     display.setText("ERROR");
-                    return -1;
+                    break;
                 }
             }
-            first = Integer.valueOf(text);
         }
-        sign = "*";
-        display.setText("*");
-        return 0;
-    }
-    public int divide(){
         text = display.getText().toString();
-        if (!sign.isEmpty()){
-            text = text.substring(1);
-            for (int i =0; i<text.length();i++){
-                if (Integer.valueOf(text.charAt(i))<49 || Integer.valueOf(text.charAt(i))>57 ){
-                    display.setText("ERROR");
-                    return -1;
-                }
-            }
-            secound = Integer.valueOf(text);
-            first /=secound;
-        }
-        else {
-            for (int i = 0; i < text.length(); i++) {
-                if (Integer.valueOf(text.charAt(i)) < 49 || Integer.valueOf(text.charAt(i)) > 57) {
-                    display.setText("ERROR");
-                    return -1;
-                }
-            }
+        if (!text.equals("ERROR")){
             first = Integer.valueOf(text);
+            sign = "/";
+            display.setHint("/");
+            display.setText("");
         }
-        sign = "/";
-        display.setText("/");
-        return 0;
     }
-    public void equal(){
+    public void equal(View view){
         if (sign.isEmpty()){display.setText("ERROR");}
 
         else{
             text = display.getText().toString();
-            secound=Integer.valueOf(text.substring(1));
-            switch (sign){
-                case "+":
-                    last = first+secound;
-                    display.setText(""+last);
-                case "-":
-                    last = first-secound;
-                    display.setText(""+last);
-                case "*":
-                    last = first*secound;
-                    display.setText(""+last);
-                case "/":
-                    last = first/secound;display.setText(""+last); default: display.setText("ERROR");
+            for (int i = 0; i < text.length(); i++) {
+                if (Integer.valueOf(text.charAt(i)) < 49 || Integer.valueOf(text.charAt(i)) > 57) {
+                    display.setText("ERROR");
+                    break;
+                }
             }
-            sign = "";
+            text = display.getText().toString();
+            if (!text.equals("ERROR")) {
+                double secound = Integer.valueOf(text);
+                switch (sign) {
+                    case "+":
+                        last = first + secound;
+                        display.setText("" + last);
+                        break;
+                    case "-":
+                        last = first - secound;
+                        display.setText("" + last);
+                        break;
+                    case "*":
+                        last = first * secound;
+                        display.setText("" + last);
+                        break;
+                    case "/":
+                        last = first / secound;
+                        display.setText("" + last);
+                        break;
+                    default:
+                        display.setText("ERROR2");
+                }
+            }
+
+            sign ="";
+            first = 0;
         }
     }
-    public void credits(){
-
+    public void credits(View view) {
+        Intent si = new Intent(this, MainActivity2.class);
+        si.putExtra("last",last);
+        startActivity(si);
+    }
+    public void ac(View view){
+        sign ="";
+        first = 0;
+        display.setText("");
+        display.setHint("");
+        last=0;
     }
 }
